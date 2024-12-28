@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Album</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .upload-section, .gallery-section {
+            margin: 20px 0;
+        }
+        .gallery-section img {
+            max-width: 100px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Photo Album</h1>
+        <div class="upload-section">
+            <h2>Upload a Picture</h2>
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+        <div class="gallery-section">
+            <h2>Gallery</h2>
+            <div id="gallery"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('imageUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    document.getElementById('gallery').appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
